@@ -1,26 +1,117 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  /* Apple-inspired font system */
+  --font-sans: ui-sans-serif, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+    "Helvetica Neue", sans-serif;
+  --font-display: ui-sans-serif, -apple-system, BlinkMacSystemFont,
+    "SF Pro Display", "Helvetica Neue", sans-serif;
+  --font-mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Monaco, Consolas,
+    monospace;
+
+  /* Apple's spacing scale (based on 8pt grid) */
+  --spacing: 0.5rem; /* 8px base unit */
+
+  /* Apple-inspired color palette */
+  --color-primary-50: oklch(0.98 0.003 255);
+  --color-primary-100: oklch(0.95 0.01 255);
+  --color-primary-200: oklch(0.9 0.03 255);
+  --color-primary-300: oklch(0.85 0.05 255);
+  --color-primary-400: oklch(0.75 0.08 255);
+  --color-primary-500: oklch(0.65 0.12 255); /* Apple Blue */
+  --color-primary-600: oklch(0.55 0.15 255);
+  --color-primary-700: oklch(0.45 0.18 255);
+  --color-primary-800: oklch(0.35 0.2 255);
+  --color-primary-900: oklch(0.25 0.22 255);
+
+  /* Apple's neutral grays */
+  --color-gray-50: oklch(0.98 0.002 255);
+  --color-gray-100: oklch(0.95 0.003 255);
+  --color-gray-200: oklch(0.9 0.004 255);
+  --color-gray-300: oklch(0.85 0.005 255);
+  --color-gray-400: oklch(0.75 0.006 255);
+  --color-gray-500: oklch(0.65 0.007 255);
+  --color-gray-600: oklch(0.55 0.008 255);
+  --color-gray-700: oklch(0.45 0.009 255);
+  --color-gray-800: oklch(0.35 0.01 255);
+  --color-gray-900: oklch(0.25 0.011 255);
+
+  /* Apple's border radius scale */
+  --radius-sm: 0.375rem; /* 6px */
+  --radius-md: 0.5rem; /* 8px */
+  --radius-lg: 0.75rem; /* 12px */
+  --radius-xl: 1rem; /* 16px */
+  --radius-2xl: 1.5rem; /* 24px */
+
+  /* Apple's shadow scale */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1),
+    0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1),
+    0 8px 10px -6px rgb(0 0 0 / 0.1);
+
+  /* Apple's transition easings */
+  --ease-default: cubic-bezier(0.25, 0.1, 0.25, 1);
+  --ease-in-out: cubic-bezier(0.42, 0, 0.58, 1);
+  --ease-bounce: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+  /* Apple's container breakpoints */
+  --breakpoint-sm: 640px; /* iPhone SE landscape */
+  --breakpoint-md: 768px; /* iPad mini */
+  --breakpoint-lg: 1024px; /* iPad Pro */
+  --breakpoint-xl: 1280px; /* MacBook Air */
+  --breakpoint-2xl: 1536px; /* iMac */
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+/* Base styles */
+@layer base {
+  body {
+    @apply antialiased text-gray-900 bg-white dark:text-gray-100 dark:bg-gray-900;
+    font-feature-settings: "ss01", "ss02", "cv01", "cv02", "cv03", "cv04";
+  }
 
-@media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: 0 0% 100%;
+    --foreground: 240 10% 3.9%;
+  }
+
+  .dark {
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
   }
 }
 
+/* Dark mode configuration */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #000000;
+    --foreground: #ffffff;
+  }
+}
+
+/* Custom utilities */
+@utility glass-effect {
+  backdrop-filter: blur(12px) saturate(180%);
+  background-color: rgba(255, 255, 255, 0.7);
+  @apply dark:bg-gray-800/70;
+}
+
+@utility text-balance {
+  text-wrap: balance;
+}
+
+@layer utilities {
+  .glass-effect {
+    @apply bg-white/70 backdrop-blur-sm border-b border-zinc-200 shadow-sm dark:bg-zinc-900/80 dark:border-zinc-800;
+  }
+}
+
+/* Smooth transitions for theme changes */
+* {
+  @apply transition-colors duration-200;
+}
+
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  @apply bg-[hsl(var(--background))] text-[hsl(var(--foreground))];
 }
