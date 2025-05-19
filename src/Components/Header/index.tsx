@@ -94,8 +94,8 @@ const Header = () => {
   const isDark = currentTheme === "dark";
 
   return (
-    <div className="flex w-full absolute top-0 left-0 items-center justify-around">
-      <div className="relative ">
+    <div className="flex w-full py-1.5 absolute top-0 left-0 items-center px-7">
+      {/* <div className="relative ">
         <AvatarContainer
           className="transition-opacity"
           style={{
@@ -104,33 +104,31 @@ const Header = () => {
           }}
         />
         <Avatar
-        // large
-        // className="h-2 w-2"
-        // style={{ transform: "var(--avatar-image-transform)" }}
+          large
+          className="h-2 w-2"
+          style={{ transform: "var(--avatar-image-transform)" }}
         />
-      </div>
+      </div> */}
+      <span className="text-7xl font-light text-zinc-50 dark:text-zinc-100 ">
+        RB
+      </span>
 
       <header
-        className={`mix-w-min z-50 transition-all duration-300 ease-default shadow-sm bg-none
-      ${scrollDirection === "down" ? "-translate-y-full" : "translate-y-0"}
-      ${
-        lastScrollY > 0
-          ? "glass-effect rounded-full px-1 py-2 bg-transparent ring-1 ring-zinc-100 dark:ring-blue-500/50"
-          : "bg-transparent rounded-full px-1 py-2 ring-1 ring-zinc-100 dark:ring-blue-500/50"
-      }`}
+        className={`mix-w-min z-50 flex-1/2 transition-all duration-300 ease-default  flex justify-end
+      ${scrollDirection === "down" ? "-translate-y-full" : "translate-y-0"}`}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 bg-transparent">
-          <nav className="flex items-center justify-between gap-6 bg-transparent">
+        <div className="max-w-7xl px-4 sm:px-6 lg:px-8 hidden sm:block ">
+          <nav className="flex items-center justify-between gap-6 ">
             {/* Logo */}
 
             {/* Navigation Links */}
-            <div className="hidden sm:flex sm:space-x-8 ml-auto bg-transparent">
+            <div className="hidden sm:flex sm:space-x-8 ml-auto">
               {["About", "Work", "Blog", "Contact"].map((item) => (
                 <Link
                   key={item}
                   href={`${item.toLowerCase()}`}
-                  className="text-sm font-medium text-gray-700 dark:text-gray-300
-                  hover:text-primary-500 dark:hover:text-green-400
+                  className="font-medium text-zinc-900 dark:text-zinc-100
+                  hover:text-white dark:hover:text-zinc-400
                   transition-colors duration-200"
                 >
                   {item}
@@ -142,7 +140,7 @@ const Header = () => {
       </header>
 
       {/* Theme Switcher */}
-      <button
+      {/* <button
         onClick={() => setTheme(isDark ? "light" : "dark")}
         className=" p-2 rounded-full shadow-lg 
               bg-white dark:bg-gray-800 text-gray-900 dark:text-white
@@ -180,7 +178,7 @@ const Header = () => {
             />
           </svg>
         )}
-      </button>
+      </button> */}
 
       {/* Mobile Menu Button */}
       <div className="sm:hidden">
