@@ -3,59 +3,59 @@
 import { useEffect, useState } from "react";
 import { useTheme } from "next-themes";
 import Link from "next/link";
-import Image from "next/image";
-import clsx from "clsx";
+// import Image from "next/image";
+// import clsx from "clsx";
 
-import avatarImage from "@/images/bnw_pp.png";
+// import avatarImage from "@/images/bnw_pp.png";
 
-function AvatarContainer({
-  className,
-  ...props
-}: React.ComponentPropsWithoutRef<"div">) {
-  return (
-    <div
-      className={clsx(
-        className,
-        "rounded-full bg-white/90 p-0.5 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur dark:bg-zinc-800/90 dark:ring-white/10"
-      )}
-      {...props}
-    />
-  );
-}
+// function AvatarContainer({
+//   className,
+//   ...props
+// }: React.ComponentPropsWithoutRef<"div">) {
+//   return (
+//     <div
+//       className={clsx(
+//         className,
+//         "rounded-full bg-white/90 p-0.5 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur dark:bg-zinc-800/90 dark:ring-white/10"
+//       )}
+//       {...props}
+//     />
+//   );
+// }
 
-function Avatar({
-  large = false,
-  className,
-  ...props
-}: Omit<React.ComponentPropsWithoutRef<typeof Link>, "href"> & {
-  large?: boolean;
-}) {
-  return (
-    <Link
-      href="/"
-      aria-label="Home"
-      className={clsx(className, "pointer-events-auto")}
-      {...props}
-    >
-      <Image
-        src={avatarImage}
-        alt=""
-        sizes={large ? "4rem" : "2.25rem"}
-        className={clsx(
-          "rounded-full bg-zinc-100 object-cover dark:bg-zinc-800",
-          large ? "h-16 w-16" : "h-7 w-7"
-        )}
-        priority
-      />
-    </Link>
-  );
-}
+// function Avatar({
+//   large = false,
+//   className,
+//   ...props
+// }: Omit<React.ComponentPropsWithoutRef<typeof Link>, "href"> & {
+//   large?: boolean;
+// }) {
+//   return (
+//     <Link
+//       href="/"
+//       aria-label="Home"
+//       className={clsx(className, "pointer-events-auto")}
+//       {...props}
+//     >
+//       <Image
+//         src={avatarImage}
+//         alt=""
+//         sizes={large ? "4rem" : "2.25rem"}
+//         className={clsx(
+//           "rounded-full bg-zinc-100 object-cover dark:bg-zinc-800",
+//           large ? "h-16 w-16" : "h-7 w-7"
+//         )}
+//         priority
+//       />
+//     </Link>
+//   );
+// }
 
 const Header = () => {
   const [mounted, setMounted] = useState(false);
   const [scrollDirection, setScrollDirection] = useState("up");
   const [lastScrollY, setLastScrollY] = useState(0);
-  const { theme, setTheme, systemTheme } = useTheme();
+  const { theme, systemTheme } = useTheme();
 
   // Wait for component to mount to avoid hydration mismatch
   useEffect(() => {
