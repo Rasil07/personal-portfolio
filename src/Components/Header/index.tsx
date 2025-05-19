@@ -94,8 +94,8 @@ const Header = () => {
   const isDark = currentTheme === "dark";
 
   return (
-    <div className="flex  w-full items-center justify-around px-10 mt-1.5 ">
-      <div className="relative">
+    <div className="flex w-full absolute top-0 left-0 items-center justify-around">
+      <div className="relative ">
         <AvatarContainer
           className="transition-opacity"
           style={{
@@ -111,20 +111,20 @@ const Header = () => {
       </div>
 
       <header
-        className={`min-w-min z-50 transition-all duration-300 ease-default shadow-sm
+        className={`mix-w-min z-50 transition-all duration-300 ease-default shadow-sm bg-none
       ${scrollDirection === "down" ? "-translate-y-full" : "translate-y-0"}
       ${
         lastScrollY > 0
-          ? "glass-effect rounded-full px-6 py-3 bg-white/80 dark:bg-gray-800/80 ring-1 ring-zinc-100 dark:ring-blue-500/50"
-          : "bg-transparent rounded-full px-6 py-3 ring-1 ring-zinc-100 dark:ring-blue-500/50"
+          ? "glass-effect rounded-full px-1 py-2 bg-transparent ring-1 ring-zinc-100 dark:ring-blue-500/50"
+          : "bg-transparent rounded-full px-1 py-2 ring-1 ring-zinc-100 dark:ring-blue-500/50"
       }`}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <nav className="flex items-center justify-between gap-6">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 bg-transparent">
+          <nav className="flex items-center justify-between gap-6 bg-transparent">
             {/* Logo */}
 
             {/* Navigation Links */}
-            <div className="hidden sm:flex sm:space-x-8 ml-auto">
+            <div className="hidden sm:flex sm:space-x-8 ml-auto bg-transparent">
               {["About", "Work", "Blog", "Contact"].map((item) => (
                 <Link
                   key={item}
