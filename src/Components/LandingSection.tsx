@@ -35,9 +35,9 @@ export default function LandingSection() {
                 d="M17 13l-5 5m0 0l-5-5m5 5V6"
               />
             </svg>
-            <p className="text-4xl text-white font-sans flex-1 tracking-widest">
+            <h2 className="text-4xl text-white font-sans flex-1 tracking-widest">
               Full Stack Software Engineer
-            </p>
+            </h2>
           </div>
 
           <div className="absolute top-1/2 -translate-y-1/2 z-40 left-0 flex items-center py-2 w-fit bg-slate-700 pr-2 pl-4 rounded-tr-full rounded-br-full">
@@ -63,7 +63,7 @@ export default function LandingSection() {
           </div>
           <div className="absolute  bottom-16 w-full overflow-hidden bg-transparent">
             <div className="whitespace-nowrap lg:text-[180px] sm:text-4xl tracking-[24px] pointer-events-none text-zinc-50 dark:text-zinc-200 animate-scroll">
-              <span
+              <h1
                 className="inline-block w-full text-center"
                 style={{
                   transform: `translateX(${scrollX * 0.95}px)`,
@@ -71,13 +71,13 @@ export default function LandingSection() {
                 }}
               >
                 - Rasil Baidar - Rasil Baidar -
-              </span>
+              </h1>
             </div>
           </div>
         </section>
       </section>
       {/* Small summary section */}
-      <section className="w-full mx-auto p-4 md:p-18 flex flex-col md:flex-row items-center">
+      <section className="w-full mx-auto p-4 md:p-18 flex flex-col md:flex-row items-center ">
         <div className="text-center w-full md:w-3/5 mb-8 md:mb-0">
           <div className="flex flex-col ">
             <div className="overflow-hidden">
@@ -180,6 +180,116 @@ export default function LandingSection() {
       </section>
 
       {/* Skills section */}
+
+      <section className="w-full px-4 md:px-18 md:py-4 ">
+        <h2 className="text-2xl text-zinc-700 dark:text-zinc-300 leading-relaxed font-light tracking-wide">
+          SKILLS
+        </h2>
+
+        <div className="w-full h-[1px] bg-zinc-300 dark:bg-zinc-600"></div>
+        <div className="w-full py-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 ">
+            {/* Frontend Card */}
+            <motion.div
+              className=" bg-white dark:bg-zinc-800 p-2 rounded-sm shadow-sm border border-zinc-200 dark:border-zinc-700"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{
+                opacity: 1,
+                y: 0,
+                transition: {
+                  duration: 0.5,
+                  delay: 0.1,
+                },
+              }}
+              whileHover={{ scale: 1.02 }}
+            >
+              <h3 className="text-xl font-serif text-zinc-900 dark:text-zinc-100 mb-4 border-b border-zinc-200 dark:border-zinc-700 pb-2">
+                Frontend Development
+              </h3>
+              <ul className="space-y-2 font-light">
+                <li className="flex items-center text-zinc-700 dark:text-zinc-300">
+                  <span className="w-2 h-2 bg-zinc-400 rounded-full mr-2"></span>
+                  React & Next.js
+                </li>
+                <li className="flex items-center text-zinc-700 dark:text-zinc-300">
+                  <span className="w-2 h-2 bg-zinc-400 rounded-full mr-2"></span>
+                  TypeScript
+                </li>
+                <li className="flex items-center text-zinc-700 dark:text-zinc-300">
+                  <span className="w-2 h-2 bg-zinc-400 rounded-full mr-2"></span>
+                  Tailwind CSS
+                </li>
+              </ul>
+            </motion.div>
+
+            {/* Backend Card */}
+            <motion.div
+              className="bg-white dark:bg-zinc-800 p-6 rounded-lg shadow-lg border border-zinc-200 dark:border-zinc-700"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{
+                opacity: 1,
+                y: 0,
+                transition: {
+                  duration: 0.5,
+                  delay: 0.2,
+                },
+              }}
+              whileHover={{ scale: 1.02 }}
+            >
+              <h3 className="text-xl font-serif text-zinc-900 dark:text-zinc-100 mb-4 border-b border-zinc-200 dark:border-zinc-700 pb-2">
+                Backend Development
+              </h3>
+              <ul className="space-y-2 font-light">
+                <li className="flex items-center text-zinc-700 dark:text-zinc-300">
+                  <span className="w-2 h-2 bg-zinc-400 rounded-full mr-2"></span>
+                  Node.js & Express
+                </li>
+                <li className="flex items-center text-zinc-700 dark:text-zinc-300">
+                  <span className="w-2 h-2 bg-zinc-400 rounded-full mr-2"></span>
+                  Python & Django
+                </li>
+                <li className="flex items-center text-zinc-700 dark:text-zinc-300">
+                  <span className="w-2 h-2 bg-zinc-400 rounded-full mr-2"></span>
+                  SQL & NoSQL
+                </li>
+              </ul>
+            </motion.div>
+
+            {/* Tools Card */}
+            <motion.div
+              className="bg-white dark:bg-zinc-800 p-6 rounded-lg shadow-lg border border-zinc-200 dark:border-zinc-700"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{
+                opacity: 1,
+                y: 0,
+                transition: {
+                  duration: 0.5,
+                  delay: 0.3,
+                },
+              }}
+              whileHover={{ scale: 1.02 }}
+            >
+              <h3 className="text-xl font-serif text-zinc-900 dark:text-zinc-100 mb-4 border-b border-zinc-200 dark:border-zinc-700 pb-2">
+                Tools & Practices
+              </h3>
+              <ul className="space-y-2 font-light">
+                <li className="flex items-center text-zinc-700 dark:text-zinc-300">
+                  <span className="w-2 h-2 bg-zinc-400 rounded-full mr-2"></span>
+                  Git & GitHub
+                </li>
+                <li className="flex items-center text-zinc-700 dark:text-zinc-300">
+                  <span className="w-2 h-2 bg-zinc-400 rounded-full mr-2"></span>
+                  Docker
+                </li>
+                <li className="flex items-center text-zinc-700 dark:text-zinc-300">
+                  <span className="w-2 h-2 bg-zinc-400 rounded-full mr-2"></span>
+                  CI/CD
+                </li>
+              </ul>
+            </motion.div>
+          </div>
+        </div>
+      </section>
 
       <style jsx global>{`
         @keyframes scroll {
