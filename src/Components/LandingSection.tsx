@@ -1,11 +1,11 @@
 "use client";
 
-import { motion } from "motion/react";
+import { AnimatePresence, motion } from "motion/react";
 import { useEffect, useState } from "react";
 
 export default function LandingSection() {
   const [scrollX, setScrollX] = useState(0);
-
+  const [activeTab, setActiveTab] = useState("Languages");
   useEffect(() => {
     const handleScroll = () => {
       setScrollX(window.scrollY * 10);
@@ -183,111 +183,296 @@ export default function LandingSection() {
 
       <section className="w-full px-4 md:px-18 md:py-4 ">
         <h2 className="text-2xl text-zinc-700 dark:text-zinc-300 leading-relaxed font-light tracking-wide">
-          SKILLS
+          TECHNICAL SKILLS
         </h2>
 
         <div className="w-full h-[1px] bg-zinc-300 dark:bg-zinc-600"></div>
         <div className="w-full py-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 ">
-            {/* Frontend Card */}
-            <motion.div
-              className=" bg-white dark:bg-zinc-800 p-2 rounded-sm shadow-sm border border-zinc-200 dark:border-zinc-700"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{
-                opacity: 1,
-                y: 0,
-                transition: {
-                  duration: 0.5,
-                  delay: 0.1,
-                },
-              }}
-              whileHover={{ scale: 1.02 }}
-            >
-              <h3 className="text-xl font-serif text-zinc-900 dark:text-zinc-100 mb-4 border-b border-zinc-200 dark:border-zinc-700 pb-2">
-                Frontend Development
-              </h3>
-              <ul className="space-y-2 font-light">
-                <li className="flex items-center text-zinc-700 dark:text-zinc-300">
-                  <span className="w-2 h-2 bg-zinc-400 rounded-full mr-2"></span>
-                  React & Next.js
-                </li>
-                <li className="flex items-center text-zinc-700 dark:text-zinc-300">
-                  <span className="w-2 h-2 bg-zinc-400 rounded-full mr-2"></span>
-                  TypeScript
-                </li>
-                <li className="flex items-center text-zinc-700 dark:text-zinc-300">
-                  <span className="w-2 h-2 bg-zinc-400 rounded-full mr-2"></span>
-                  Tailwind CSS
-                </li>
-              </ul>
-            </motion.div>
-
-            {/* Backend Card */}
-            <motion.div
-              className="bg-white dark:bg-zinc-800 p-6 rounded-lg shadow-lg border border-zinc-200 dark:border-zinc-700"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{
-                opacity: 1,
-                y: 0,
-                transition: {
-                  duration: 0.5,
-                  delay: 0.2,
-                },
-              }}
-              whileHover={{ scale: 1.02 }}
-            >
-              <h3 className="text-xl font-serif text-zinc-900 dark:text-zinc-100 mb-4 border-b border-zinc-200 dark:border-zinc-700 pb-2">
-                Backend Development
-              </h3>
-              <ul className="space-y-2 font-light">
-                <li className="flex items-center text-zinc-700 dark:text-zinc-300">
-                  <span className="w-2 h-2 bg-zinc-400 rounded-full mr-2"></span>
-                  Node.js & Express
-                </li>
-                <li className="flex items-center text-zinc-700 dark:text-zinc-300">
-                  <span className="w-2 h-2 bg-zinc-400 rounded-full mr-2"></span>
-                  Python & Django
-                </li>
-                <li className="flex items-center text-zinc-700 dark:text-zinc-300">
-                  <span className="w-2 h-2 bg-zinc-400 rounded-full mr-2"></span>
-                  SQL & NoSQL
-                </li>
-              </ul>
-            </motion.div>
-
-            {/* Tools Card */}
-            <motion.div
-              className="bg-white dark:bg-zinc-800 p-6 rounded-lg shadow-lg border border-zinc-200 dark:border-zinc-700"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{
-                opacity: 1,
-                y: 0,
-                transition: {
-                  duration: 0.5,
-                  delay: 0.3,
-                },
-              }}
-              whileHover={{ scale: 1.02 }}
-            >
-              <h3 className="text-xl font-serif text-zinc-900 dark:text-zinc-100 mb-4 border-b border-zinc-200 dark:border-zinc-700 pb-2">
-                Tools & Practices
-              </h3>
-              <ul className="space-y-2 font-light">
-                <li className="flex items-center text-zinc-700 dark:text-zinc-300">
-                  <span className="w-2 h-2 bg-zinc-400 rounded-full mr-2"></span>
-                  Git & GitHub
-                </li>
-                <li className="flex items-center text-zinc-700 dark:text-zinc-300">
-                  <span className="w-2 h-2 bg-zinc-400 rounded-full mr-2"></span>
-                  Docker
-                </li>
-                <li className="flex items-center text-zinc-700 dark:text-zinc-300">
-                  <span className="w-2 h-2 bg-zinc-400 rounded-full mr-2"></span>
-                  CI/CD
-                </li>
-              </ul>
-            </motion.div>
+          {/* Tabs */}
+          <div className="flex mb-4  justify-center">
+            {[
+              "Languages",
+              "Framework/Libraries",
+              "Cloud/DevOps",
+              "Concepts",
+            ].map((tab, index) => (
+              <motion.button
+                key={tab}
+                className="px-6 py-2 text-zinc-700 dark:text-zinc-300 font-medium relative"
+                whileHover={{ scale: 1.05 }}
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.1 }}
+                onClick={() => setActiveTab(tab)}
+              >
+                {tab}
+                {activeTab === tab && (
+                  <motion.div
+                    className="absolute bottom-0 left-0 right-0 h-[1px] bg-zinc-800 dark:bg-zinc-200 rounded-full"
+                    layoutId="activeTab"
+                  />
+                )}
+              </motion.button>
+            ))}
           </div>
+
+          {/* Content */}
+          <AnimatePresence mode="wait">
+            {activeTab === "Languages" && (
+              <motion.div
+                key="languages"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.2 }}
+                className="grid grid-cols-1 sm:grid-cols-3 gap-4 p-6"
+              >
+                <motion.div
+                  className="flex items-center justify-center p-4 rounded-lg bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors duration-200"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <span className="text-zinc-700 dark:text-zinc-300 font-medium">
+                    TypeScript
+                  </span>
+                </motion.div>
+
+                <motion.div
+                  className="flex items-center justify-center p-4 rounded-lg bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors duration-200"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <span className="text-zinc-700 dark:text-zinc-300 font-medium">
+                    JavaScript
+                  </span>
+                </motion.div>
+                <motion.div
+                  className="flex items-center justify-center p-4 rounded-lg bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors duration-200"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <span className="text-zinc-700 dark:text-zinc-300 font-medium">
+                    Python
+                  </span>
+                </motion.div>
+                <motion.div
+                  className="flex items-center justify-center p-4 rounded-lg bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors duration-200"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <span className="text-zinc-700 dark:text-zinc-300 font-medium">
+                    Go
+                  </span>
+                </motion.div>
+              </motion.div>
+            )}
+
+            {activeTab === "Framework/Libraries" && (
+              <motion.div
+                key="frameworks"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.2 }}
+                className="grid grid-cols-1 sm:grid-cols-3 gap-4 p-6"
+              >
+                <motion.div
+                  className="flex items-center justify-center p-4 rounded-lg bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors duration-200"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <span className="text-zinc-700 dark:text-zinc-300 font-medium">
+                    Node.js
+                  </span>
+                </motion.div>
+
+                <motion.div
+                  className="flex items-center justify-center p-4 rounded-lg bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors duration-200"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <span className="text-zinc-700 dark:text-zinc-300 font-medium">
+                    Express.js
+                  </span>
+                </motion.div>
+                <motion.div
+                  className="flex items-center justify-center p-4 rounded-lg bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors duration-200"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <span className="text-zinc-700 dark:text-zinc-300 font-medium">
+                    Nest.js
+                  </span>
+                </motion.div>
+                <motion.div
+                  className="flex items-center justify-center p-4 rounded-lg bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors duration-200"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <span className="text-zinc-700 dark:text-zinc-300 font-medium">
+                    React.js
+                  </span>
+                </motion.div>
+                <motion.div
+                  className="flex items-center justify-center p-4 rounded-lg bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors duration-200"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <span className="text-zinc-700 dark:text-zinc-300 font-medium">
+                    Next.js
+                  </span>
+                </motion.div>
+
+                <motion.div
+                  className="flex items-center justify-center p-4 rounded-lg bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors duration-200"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <span className="text-zinc-700 dark:text-zinc-300 font-medium">
+                    D3.js
+                  </span>
+                </motion.div>
+
+                <motion.div
+                  className="flex items-center justify-center p-4 rounded-lg bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors duration-200"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <span className="text-zinc-700 dark:text-zinc-300 font-medium">
+                    React Native
+                  </span>
+                </motion.div>
+
+                <motion.div
+                  className="flex items-center justify-center p-4 rounded-lg bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors duration-200"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <span className="text-zinc-700 dark:text-zinc-300 font-medium">
+                    Framer Motion
+                  </span>
+                </motion.div>
+
+                <motion.div
+                  className="flex items-center justify-center p-4 rounded-lg bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors duration-200"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <span className="text-zinc-700 dark:text-zinc-300 font-medium">
+                    Tailwind CSS
+                  </span>
+                </motion.div>
+              </motion.div>
+            )}
+
+            {activeTab === "Cloud/DevOps" && (
+              <motion.div
+                key="cloud"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.2 }}
+                className="grid grid-cols-1 sm:grid-cols-4 gap-4 p-6"
+              >
+                <motion.div
+                  className="flex items-center justify-center p-4 rounded-lg bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors duration-200"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <span className="text-zinc-700 dark:text-zinc-300 font-medium">
+                    AWS Services
+                  </span>
+                </motion.div>
+
+                <motion.div
+                  className="flex items-center justify-center p-4 rounded-lg bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors duration-200"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <span className="text-zinc-700 dark:text-zinc-300 font-medium">
+                    MongoDB
+                  </span>
+                </motion.div>
+
+                <motion.div
+                  className="flex items-center justify-center p-4 rounded-lg bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors duration-200"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <span className="text-zinc-700 dark:text-zinc-300 font-medium">
+                    DynamoDB
+                  </span>
+                </motion.div>
+                <motion.div
+                  className="flex items-center justify-center p-4 rounded-lg bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors duration-200"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <span className="text-zinc-700 dark:text-zinc-300 font-medium">
+                    PostgreSQL
+                  </span>
+                </motion.div>
+                <motion.div
+                  className="flex items-center justify-center p-4 rounded-lg bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors duration-200"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <span className="text-zinc-700 dark:text-zinc-300 font-medium">
+                    Docker
+                  </span>
+                </motion.div>
+              </motion.div>
+            )}
+
+            {activeTab === "Concepts" && (
+              <motion.div
+                key="concepts"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.2 }}
+                className="grid grid-cols-1 sm:grid-cols-4 gap-4 p-6"
+              >
+                <motion.div
+                  className="flex items-center justify-center p-4 rounded-lg bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors duration-200"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <span className="text-zinc-700 dark:text-zinc-300 font-medium">
+                    DSA
+                  </span>
+                </motion.div>
+                <motion.div
+                  className="flex items-center justify-center p-4 rounded-lg bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors duration-200"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <span className="text-zinc-700 dark:text-zinc-300 font-medium">
+                    Microservices
+                  </span>
+                </motion.div>
+                <motion.div
+                  className="flex items-center justify-center p-4 rounded-lg bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors duration-200"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <span className="text-zinc-700 dark:text-zinc-300 font-medium">
+                    Micro Frontends
+                  </span>
+                </motion.div>
+
+                <motion.div
+                  className="flex items-center justify-center p-4 rounded-lg bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors duration-200"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <span className="text-zinc-700 dark:text-zinc-300 font-medium">
+                    System Design
+                  </span>
+                </motion.div>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
       </section>
 
