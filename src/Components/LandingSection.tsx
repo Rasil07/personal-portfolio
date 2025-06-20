@@ -2,6 +2,9 @@
 
 import { AnimatePresence, motion } from "motion/react";
 import { useEffect, useState } from "react";
+import Image from "next/image";
+
+import reactLogo from "@/images/react_logo.png";
 
 export default function LandingSection() {
   const [scrollX, setScrollX] = useState(0);
@@ -225,14 +228,20 @@ export default function LandingSection() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -20 }}
                 transition={{ duration: 0.2 }}
-                className="grid grid-cols-1 sm:grid-cols-3 gap-4 p-6"
+                className="grid grid-cols-1 sm:grid-cols-4 gap-4 p-6"
               >
                 <motion.div
-                  className="flex items-center justify-center p-4 rounded-lg bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors duration-200"
+                  className="flex items-center justify-center p-0 rounded-lg bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors duration-200"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  <span className="text-zinc-700 dark:text-zinc-300 font-medium">
+                  <span className="text-zinc-700 dark:text-zinc-300 font-medium flex items-center gap-2">
+                    <Image
+                      src={reactLogo}
+                      alt="TypeScript"
+                      width={35}
+                      height={24}
+                    />
                     TypeScript
                   </span>
                 </motion.div>
@@ -274,7 +283,7 @@ export default function LandingSection() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -20 }}
                 transition={{ duration: 0.2 }}
-                className="grid grid-cols-1 sm:grid-cols-3 gap-4 p-6"
+                className="grid grid-cols-1 sm:grid-cols-4 gap-4 p-6"
               >
                 <motion.div
                   className="flex items-center justify-center p-4 rounded-lg bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors duration-200"
