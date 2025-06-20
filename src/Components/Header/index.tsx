@@ -3,53 +3,53 @@
 import { useEffect, useState } from "react";
 import { useTheme } from "next-themes";
 import Link from "next/link";
-// import Image from "next/image";
-// import clsx from "clsx";
+import Image from "next/image";
+import clsx from "clsx";
 
-// import avatarImage from "@/images/bnw_pp.png";
+import avatarImage from "@/images/brand_logo.png";
 
-// function AvatarContainer({
-//   className,
-//   ...props
-// }: React.ComponentPropsWithoutRef<"div">) {
-//   return (
-//     <div
-//       className={clsx(
-//         className,
-//         "rounded-full bg-white/90 p-0.5 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur dark:bg-zinc-800/90 dark:ring-white/10"
-//       )}
-//       {...props}
-//     />
-//   );
-// }
+function AvatarContainer({
+  className,
+  ...props
+}: React.ComponentPropsWithoutRef<"div">) {
+  return (
+    <div
+      className={clsx(
+        className,
+        "rounded-full bg-white/90 p-0.5 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur dark:bg-zinc-800/90 dark:ring-white/10"
+      )}
+      {...props}
+    />
+  );
+}
 
-// function Avatar({
-//   large = false,
-//   className,
-//   ...props
-// }: Omit<React.ComponentPropsWithoutRef<typeof Link>, "href"> & {
-//   large?: boolean;
-// }) {
-//   return (
-//     <Link
-//       href="/"
-//       aria-label="Home"
-//       className={clsx(className, "pointer-events-auto")}
-//       {...props}
-//     >
-//       <Image
-//         src={avatarImage}
-//         alt=""
-//         sizes={large ? "4rem" : "2.25rem"}
-//         className={clsx(
-//           "rounded-full bg-zinc-100 object-cover dark:bg-zinc-800",
-//           large ? "h-16 w-16" : "h-7 w-7"
-//         )}
-//         priority
-//       />
-//     </Link>
-//   );
-// }
+function Avatar({
+  large = false,
+  className,
+  ...props
+}: Omit<React.ComponentPropsWithoutRef<typeof Link>, "href"> & {
+  large?: boolean;
+}) {
+  return (
+    <Link
+      href="/"
+      aria-label="Home"
+      className={clsx(className, "pointer-events-auto")}
+      {...props}
+    >
+      <Image
+        src={avatarImage}
+        alt=""
+        sizes={large ? "4rem" : "2.25rem"}
+        className={clsx(
+          "rounded-full bg-zinc-100 object-cover dark:bg-zinc-800",
+          large ? "h-16 w-16" : "h-7 w-7"
+        )}
+        priority
+      />
+    </Link>
+  );
+}
 
 const Header = () => {
   const [mounted, setMounted] = useState(false);
@@ -95,23 +95,21 @@ const Header = () => {
 
   return (
     <div className="flex w-full py-1.5 absolute top-0 left-0 items-center px-7">
-      {/* <div className="relative ">
-        <AvatarContainer
-          className="transition-opacity"
-          style={{
-            opacity: "var(--avatar-border-opacity, 0)",
-            transform: "var(--avatar-border-transform)",
-          }}
-        />
-        <Avatar
-          large
-          className="h-2 w-2"
-          style={{ transform: "var(--avatar-image-transform)" }}
-        />
-      </div> */}
-      <span className="text-7xl font-light text-zinc-50 dark:text-zinc-100 ">
-        RB
-      </span>
+      <div className="relative ">
+        <Link
+          href="/"
+          aria-label="Home"
+          className={clsx("pointer-events-auto")}
+        >
+          <Image
+            src={avatarImage}
+            alt=""
+            sizes={"4rem"}
+            className={clsx("object-cover dark:bg-zinc-800", "h-5 w-max")}
+            priority
+          />
+        </Link>
+      </div>
 
       <header
         className={`mix-w-min z-50 flex-1/2 transition-all duration-300 ease-default  flex justify-end

@@ -35,38 +35,93 @@ export default function LandingSection() {
           </div>
         </section>
       </section>
-      <section className="w-full mx-auto px-4 py-8 flex items-center">
-        <div className="text-center w-3/5">
-          <p className="text-xl md:text-3xl lg:text-2xl text-zinc-700 dark:text-zinc-300 leading-relaxed font-serif">
-            Turning complex ideas into elegant solutions through code. I craft
-            seamless digital experiences with modern tech, bringing creativity
-            and precision to every project.
-          </p>
+      {/* Small summary section */}
+      <section className="w-full mx-auto p-4 md:p-18 flex flex-col md:flex-row items-center">
+        <div className="text-center w-full md:w-3/5 mb-8 md:mb-0">
+          <div className="flex flex-col ">
+            <div className="overflow-hidden">
+              <motion.p
+                className="text-xl md:text-2xl lg:text-3xl text-zinc-700 dark:text-zinc-300 leading-relaxed font-light"
+                initial={{ y: "100%" }}
+                whileInView={{
+                  y: 0,
+                  transition: {
+                    duration: 0.8,
+                    ease: [0.43, 0.13, 0.23, 0.96],
+                    delay: 0,
+                  },
+                }}
+                viewport={{ margin: "-100px" }}
+              >
+                Turning complex ideas into elegant solutions through code.
+              </motion.p>
+            </div>
+
+            <div className="overflow-hidden">
+              <motion.p
+                className="text-xl md:text-2xl lg:text-3xl text-zinc-700 dark:text-zinc-300 leading-relaxed font-light"
+                initial={{ y: "100%" }}
+                whileInView={{
+                  y: 0,
+                  transition: {
+                    duration: 0.8,
+                    ease: [0.43, 0.13, 0.23, 0.96],
+                    delay: 0.2,
+                  },
+                }}
+                viewport={{ margin: "-100px" }}
+              >
+                I craft seamless digital experiences with modern tech,
+              </motion.p>
+            </div>
+
+            <div className="overflow-hidden">
+              <motion.p
+                className="text-xl md:text-2xl lg:text-3xl text-zinc-700 dark:text-zinc-300 leading-relaxed font-light"
+                initial={{ y: "100%" }}
+                whileInView={{
+                  y: 0,
+                  transition: {
+                    duration: 0.8,
+                    ease: [0.43, 0.13, 0.23, 0.96],
+                    delay: 0.4,
+                  },
+                }}
+                viewport={{ margin: "-100px" }}
+              >
+                bringing creativity and precision to every project.
+              </motion.p>
+            </div>
+          </div>
         </div>
         <div className="flex flex-1 justify-center items-center">
           <motion.a
             href="/about"
-            className="w-20 h-20 rounded-full bg-zinc-800 dark:bg-zinc-100 text-zinc-100 dark:text-zinc-800 flex items-center justify-center"
-            initial={{ y: -100, x: 0, opacity: 0 }}
+            className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-zinc-800 dark:bg-zinc-100 text-zinc-100 dark:text-zinc-800 flex items-center justify-center"
+            initial={{ y: -25, x: 0, opacity: 0 }}
             whileInView={{
               y: 0,
               x: 0,
               opacity: 1,
-              // rotate: scrollX * 0.022,
               transition: {
                 y: {
                   type: "spring",
-                  bounce: 0.2,
+                  bounce: 0.6,
                   duration: 1.5,
+                  stiffness: 200,
+                  damping: 10,
+                  delay: 0.7,
                 },
                 x: {
                   type: "spring",
                   bounce: 0.3,
                   duration: 2,
-                  delay: 1.5,
+                  delay: 0.7,
                 },
+                delay: 1,
                 opacity: {
                   duration: 0.5,
+                  delay: 0.7,
                 },
               },
             }}
@@ -78,7 +133,7 @@ export default function LandingSection() {
               transition: { duration: 0.2 },
             }}
           >
-            <span className="text-lg font-medium">Learn More</span>
+            <span className="text-base md:text-lg font-medium">Learn More</span>
           </motion.a>
         </div>
       </section>
