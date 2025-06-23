@@ -4,11 +4,165 @@ import { AnimatePresence, motion } from "motion/react";
 import { useEffect, useState } from "react";
 import Image from "next/image";
 
-import reactLogo from "@/images/react_logo.png";
+type TSkill = {
+  name: string;
+  logo: string;
+  isTypography?: boolean;
+};
+
+const SKILLS: Record<string, TSkill[]> = {
+  languages: [
+    {
+      name: "TypeScript",
+      logo: "/images/typescript_logo.png",
+    },
+    {
+      name: "JavaScript",
+      logo: "/images/javascript_logo.png",
+    },
+    {
+      name: "Python",
+      logo: "/images/python_logo.png",
+    },
+    {
+      name: "Go",
+      logo: "/images/go_logo.svg",
+    },
+  ],
+  "framework/libraries": [
+    {
+      name: "Node.js",
+      logo: "/images/node_logo.png",
+    },
+    {
+      name: "Express.js",
+      logo: "/images/express_logo.png",
+    },
+    {
+      name: "Nest.js",
+      logo: "/images/nestjs_logo.svg",
+    },
+    {
+      name: "React",
+      logo: "/images/react_logo.png",
+    },
+
+    {
+      name: "Next.js",
+      logo: "/images/next_logo.png",
+    },
+    {
+      name: "Tailwind CSS",
+      logo: "/images/tailwind_logo.svg",
+    },
+    {
+      name: "D3.js",
+      logo: "/images/d3.svg",
+    },
+    {
+      name: "Framer Motion",
+      logo: "/images/framer_motion_logo.svg",
+    },
+  ],
+  "cloud/devops": [
+    {
+      name: "AWS",
+      logo: "/images/aws_logo.png",
+    },
+    {
+      name: "Docker",
+      logo: "/images/docker_logo.svg",
+    },
+    {
+      name: "Git",
+      logo: "/images/git_logo.svg",
+    },
+    {
+      name: "Postgres",
+      logo: "/images/postgres_logo.png",
+    },
+    {
+      name: "MySQL",
+      logo: "/images/mysql_logo.png",
+    },
+    {
+      name: "MongoDB",
+      logo: "/images/mongodb_logo.svg",
+    },
+    {
+      name: "Redis",
+      logo: "/images/redis_logo.svg",
+    },
+    {
+      name: "DynamoDB",
+      logo: "/images/dynamodb_logo.png",
+    },
+  ],
+  concepts: [
+    {
+      name: "Design Patterns",
+      logo: "/images/design_patterns_logo.png",
+      isTypography: true,
+    },
+    {
+      name: "API Design",
+      logo: "/images/api_design.png",
+      isTypography: false,
+    },
+
+    {
+      name: "DSA",
+      logo: "/images/dsa_logo.png",
+      isTypography: false,
+    },
+    {
+      name: "System Design",
+      logo: "/images/system_design.png",
+      isTypography: false,
+    },
+    {
+      name: "Microservices",
+      logo: "/images/microservices_logo.png",
+      isTypography: false,
+    },
+    {
+      name: "SOLID Principles",
+      logo: "/images/solid_principles.png",
+      isTypography: true,
+    },
+  ],
+};
+
+const SkillCard = ({
+  skill,
+  logo,
+  typography,
+}: {
+  skill: string;
+  logo: string;
+  typography: boolean;
+}) => {
+  return (
+    <motion.div
+      className="flex items-center justify-center p-4 rounded-lg border border-zinc-300 dark:border-zinc-600"
+      whileHover={{ scale: 1.05 }}
+      whileTap={{ scale: 0.95 }}
+    >
+      {!typography ? (
+        <span className="text-zinc-700 dark:text-zinc-300 font-medium flex flex-col items-center gap-2">
+          <Image src={logo} alt={skill} width={100} height={40} />
+          {skill}
+        </span>
+      ) : (
+        <Image src={logo} alt={skill} width={100} height={40} />
+      )}
+    </motion.div>
+  );
+};
 
 export default function LandingSection() {
   const [scrollX, setScrollX] = useState(0);
-  const [activeTab, setActiveTab] = useState("Languages");
+  const [activeTab, setActiveTab] = useState("languages");
   useEffect(() => {
     const handleScroll = () => {
       setScrollX(window.scrollY * 10);
@@ -67,10 +221,10 @@ export default function LandingSection() {
           <div className="absolute  bottom-16 w-full overflow-hidden bg-transparent">
             <div className="whitespace-nowrap lg:text-[180px] sm:text-4xl tracking-[24px] pointer-events-none text-zinc-50 dark:text-zinc-200 animate-scroll">
               <h1
-                className="inline-block w-full text-center"
+                className=""
                 style={{
-                  transform: `translateX(${scrollX * 0.95}px)`,
-                  transition: "transform 0.1s linear",
+                  transform: `translateX(${scrollX * 0.1}px)`,
+                  transition: "transform 0.3s linear",
                 }}
               >
                 - Rasil Baidar - Rasil Baidar -
@@ -193,23 +347,18 @@ export default function LandingSection() {
         <div className="w-full py-4">
           {/* Tabs */}
           <div className="flex mb-4  justify-center">
-            {[
-              "Languages",
-              "Framework/Libraries",
-              "Cloud/DevOps",
-              "Concepts",
-            ].map((tab, index) => (
+            {Object.keys(SKILLS).map((tab, index) => (
               <motion.button
                 key={tab}
-                className="px-6 py-2 text-zinc-700 dark:text-zinc-300 font-medium relative"
+                className="px-6 py-2 text-zinc-700 dark:text-zinc-300 font-medium relative cursor-pointer"
                 whileHover={{ scale: 1.05 }}
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
                 onClick={() => setActiveTab(tab)}
               >
-                {tab}
-                {activeTab === tab && (
+                {tab.toUpperCase()}
+                {activeTab === tab.toLowerCase() && (
                   <motion.div
                     className="absolute bottom-0 left-0 right-0 h-[1px] bg-zinc-800 dark:bg-zinc-200 rounded-full"
                     layoutId="activeTab"
@@ -221,266 +370,23 @@ export default function LandingSection() {
 
           {/* Content */}
           <AnimatePresence mode="wait">
-            {activeTab === "Languages" && (
-              <motion.div
-                key="languages"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.2 }}
-                className="grid grid-cols-1 sm:grid-cols-4 gap-4 p-6"
-              >
-                <motion.div
-                  className="flex items-center justify-center p-0 rounded-lg bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors duration-200"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <span className="text-zinc-700 dark:text-zinc-300 font-medium flex items-center gap-2">
-                    <Image
-                      src={reactLogo}
-                      alt="TypeScript"
-                      width={35}
-                      height={24}
-                    />
-                    TypeScript
-                  </span>
-                </motion.div>
-
-                <motion.div
-                  className="flex items-center justify-center p-4 rounded-lg bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors duration-200"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <span className="text-zinc-700 dark:text-zinc-300 font-medium">
-                    JavaScript
-                  </span>
-                </motion.div>
-                <motion.div
-                  className="flex items-center justify-center p-4 rounded-lg bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors duration-200"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <span className="text-zinc-700 dark:text-zinc-300 font-medium">
-                    Python
-                  </span>
-                </motion.div>
-                <motion.div
-                  className="flex items-center justify-center p-4 rounded-lg bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors duration-200"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <span className="text-zinc-700 dark:text-zinc-300 font-medium">
-                    Go
-                  </span>
-                </motion.div>
-              </motion.div>
-            )}
-
-            {activeTab === "Framework/Libraries" && (
-              <motion.div
-                key="frameworks"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.2 }}
-                className="grid grid-cols-1 sm:grid-cols-4 gap-4 p-6"
-              >
-                <motion.div
-                  className="flex items-center justify-center p-4 rounded-lg bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors duration-200"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <span className="text-zinc-700 dark:text-zinc-300 font-medium">
-                    Node.js
-                  </span>
-                </motion.div>
-
-                <motion.div
-                  className="flex items-center justify-center p-4 rounded-lg bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors duration-200"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <span className="text-zinc-700 dark:text-zinc-300 font-medium">
-                    Express.js
-                  </span>
-                </motion.div>
-                <motion.div
-                  className="flex items-center justify-center p-4 rounded-lg bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors duration-200"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <span className="text-zinc-700 dark:text-zinc-300 font-medium">
-                    Nest.js
-                  </span>
-                </motion.div>
-                <motion.div
-                  className="flex items-center justify-center p-4 rounded-lg bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors duration-200"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <span className="text-zinc-700 dark:text-zinc-300 font-medium">
-                    React.js
-                  </span>
-                </motion.div>
-                <motion.div
-                  className="flex items-center justify-center p-4 rounded-lg bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors duration-200"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <span className="text-zinc-700 dark:text-zinc-300 font-medium">
-                    Next.js
-                  </span>
-                </motion.div>
-
-                <motion.div
-                  className="flex items-center justify-center p-4 rounded-lg bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors duration-200"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <span className="text-zinc-700 dark:text-zinc-300 font-medium">
-                    D3.js
-                  </span>
-                </motion.div>
-
-                <motion.div
-                  className="flex items-center justify-center p-4 rounded-lg bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors duration-200"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <span className="text-zinc-700 dark:text-zinc-300 font-medium">
-                    React Native
-                  </span>
-                </motion.div>
-
-                <motion.div
-                  className="flex items-center justify-center p-4 rounded-lg bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors duration-200"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <span className="text-zinc-700 dark:text-zinc-300 font-medium">
-                    Framer Motion
-                  </span>
-                </motion.div>
-
-                <motion.div
-                  className="flex items-center justify-center p-4 rounded-lg bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors duration-200"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <span className="text-zinc-700 dark:text-zinc-300 font-medium">
-                    Tailwind CSS
-                  </span>
-                </motion.div>
-              </motion.div>
-            )}
-
-            {activeTab === "Cloud/DevOps" && (
-              <motion.div
-                key="cloud"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.2 }}
-                className="grid grid-cols-1 sm:grid-cols-4 gap-4 p-6"
-              >
-                <motion.div
-                  className="flex items-center justify-center p-4 rounded-lg bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors duration-200"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <span className="text-zinc-700 dark:text-zinc-300 font-medium">
-                    AWS Services
-                  </span>
-                </motion.div>
-
-                <motion.div
-                  className="flex items-center justify-center p-4 rounded-lg bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors duration-200"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <span className="text-zinc-700 dark:text-zinc-300 font-medium">
-                    MongoDB
-                  </span>
-                </motion.div>
-
-                <motion.div
-                  className="flex items-center justify-center p-4 rounded-lg bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors duration-200"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <span className="text-zinc-700 dark:text-zinc-300 font-medium">
-                    DynamoDB
-                  </span>
-                </motion.div>
-                <motion.div
-                  className="flex items-center justify-center p-4 rounded-lg bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors duration-200"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <span className="text-zinc-700 dark:text-zinc-300 font-medium">
-                    PostgreSQL
-                  </span>
-                </motion.div>
-                <motion.div
-                  className="flex items-center justify-center p-4 rounded-lg bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors duration-200"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <span className="text-zinc-700 dark:text-zinc-300 font-medium">
-                    Docker
-                  </span>
-                </motion.div>
-              </motion.div>
-            )}
-
-            {activeTab === "Concepts" && (
-              <motion.div
-                key="concepts"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.2 }}
-                className="grid grid-cols-1 sm:grid-cols-4 gap-4 p-6"
-              >
-                <motion.div
-                  className="flex items-center justify-center p-4 rounded-lg bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors duration-200"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <span className="text-zinc-700 dark:text-zinc-300 font-medium">
-                    DSA
-                  </span>
-                </motion.div>
-                <motion.div
-                  className="flex items-center justify-center p-4 rounded-lg bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors duration-200"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <span className="text-zinc-700 dark:text-zinc-300 font-medium">
-                    Microservices
-                  </span>
-                </motion.div>
-                <motion.div
-                  className="flex items-center justify-center p-4 rounded-lg bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors duration-200"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <span className="text-zinc-700 dark:text-zinc-300 font-medium">
-                    Micro Frontends
-                  </span>
-                </motion.div>
-
-                <motion.div
-                  className="flex items-center justify-center p-4 rounded-lg bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors duration-200"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <span className="text-zinc-700 dark:text-zinc-300 font-medium">
-                    System Design
-                  </span>
-                </motion.div>
-              </motion.div>
-            )}
+            <motion.div
+              key={activeTab}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.2 }}
+              className="grid grid-cols-1 sm:grid-cols-4 gap-4 p-6"
+            >
+              {SKILLS[activeTab as keyof typeof SKILLS].map((skill, index) => (
+                <SkillCard
+                  key={index}
+                  skill={skill.name}
+                  logo={skill.logo}
+                  typography={skill.isTypography ?? false}
+                />
+              ))}
+            </motion.div>
           </AnimatePresence>
         </div>
       </section>
