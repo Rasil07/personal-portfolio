@@ -1,9 +1,13 @@
 import type { Metadata } from "next";
-// import { ThemeProvider } from "next-themes";
 
 import { Providers } from "@/app/providers";
 import "./globals.css";
-import { Layout } from "@/Components/Layout";
+
+import Sidebar from "@/components/sidebar";
+import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import { Breadcrumbs } from "@/components/breadcrumbs";
+import { Separator } from "@/components/ui/separator";
+import FloatingActionButton from "@/components/buttons/FloatingActionButton";
 
 export const metadata: Metadata = {
   title: "Rasil Baidar | Full Stack Developer",
@@ -47,28 +51,6 @@ export const metadata: Metadata = {
   },
 };
 
-// export default function RootLayout({
-//   children,
-// }: {
-//   children: React.ReactNode;
-// }) {
-//   return (
-//     <html lang="en" suppressHydrationWarning>
-
-//       <body className="antialiased">
-//         <ThemeProvider
-//           attribute="class"
-//           defaultTheme="system"
-//           enableSystem
-//           disableTransitionOnChange
-//         >
-//           {children}
-//         </ThemeProvider>
-//       </body>
-//     </html>
-//   );
-// }
-
 export default function RootLayout({
   children,
 }: {
@@ -101,7 +83,23 @@ export default function RootLayout({
       <body className="flex h-full bg-zinc-50 dark:bg-black">
         <Providers>
           <div className="flex w-full">
-            <Layout>{children}</Layout>
+            <SidebarProvider>
+              <Sidebar />
+              <main className="flex-auto ">
+                <div className="flex items-center">
+                  <SidebarTrigger />
+                  <Separator
+                    orientation="vertical"
+                    className="mr-2 data-[orientation=vertical]:h-4"
+                  />
+
+                  <Breadcrumbs />
+                </div>
+
+                {children}
+              </main>
+            </SidebarProvider>
+            <FloatingActionButton />
           </div>
         </Providers>
       </body>
