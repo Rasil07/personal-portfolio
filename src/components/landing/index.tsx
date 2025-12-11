@@ -352,7 +352,7 @@ const Landing = () => {
           variants={itemVariants}
           onHoverStart={() => setActiveSection(5)}
           onHoverEnd={() => setActiveSection(null)}
-          className="p-3 rounded-md transition-colors hover:bg-accent/30"
+          className="p-3 rounded-md transition-colors hover:bg-accent/30 mb-6"
         >
           <h2 className="text-base font-semibold mb-2 flex items-center gap-2">
             <span
@@ -382,7 +382,7 @@ const Landing = () => {
           </ul>
         </motion.section>
 
-        {/* Action Buttons */}
+        {/* //Action Buttons
         <motion.div variants={itemVariants} className="flex gap-3 pt-3">
           <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
             <Link
@@ -400,7 +400,7 @@ const Landing = () => {
               Contact
             </Link>
           </motion.div>
-        </motion.div>
+        </motion.div> */}
       </motion.div>
       <NextPageButton url="/career" label="Career" />
     </div>

@@ -324,7 +324,7 @@ const Skills = () => {
         transition={{ duration: 0.5, delay: 0.8 }}
       >
         <NextPageButton url="/career" label="Career" back={true} />
-        <NextPageButton url="/projects" label="Projects" back={false} />
+        <NextPageButton url="/contact" label="Contact" back={false} />
       </motion.div>
     </div>
   );

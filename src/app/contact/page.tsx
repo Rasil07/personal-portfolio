@@ -5,6 +5,7 @@ import { useForm, ValidationError } from "@formspree/react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { SOCIAL_CONTACTS } from "@/lib/data";
+import NextPageButton from "@/components/buttons/nextPage";
 
 const Contact = () => {
   const [state, handleSubmit] = useForm("xzznjlgv");
@@ -237,7 +238,7 @@ const Contact = () => {
 
       {/* Alternative Contact */}
       <motion.div
-        className="mt-10 pt-6 border-t border-dashed border-gray-300"
+        className="mt-10 pt-6 border-t border-dashed border-gray-300 mb-6"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5, delay: 0.5 }}
@@ -283,6 +284,16 @@ const Contact = () => {
             GitHub
           </a>
         </div>
+      </motion.div>
+
+      {/* Navigation */}
+      <motion.div
+        className="flex justify-between gap-4"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 0.8 }}
+      >
+        <NextPageButton url="/skills" label="Skills" back={true} />
       </motion.div>
     </div>
   );
