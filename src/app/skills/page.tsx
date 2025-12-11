@@ -295,7 +295,7 @@ const Skills = () => {
       >
         <h2 className="text-lg font-semibold mb-3">Related sections</h2>
         <div className="space-y-2 text-sm">
-          <Link
+          {/* <Link
             href="/projects"
             className="flex items-center gap-2 text-primary hover:underline font-medium group"
           >
@@ -303,7 +303,7 @@ const Skills = () => {
               →
             </span>
             <span>Projects – where these tools show up in real systems.</span>
-          </Link>
+          </Link> */}
           <Link
             href="/career"
             className="flex items-center gap-2 text-primary hover:underline font-medium group"
