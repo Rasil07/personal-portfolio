@@ -331,7 +331,7 @@ const Landing = () => {
               .
             </li>
             <li className="hover:text-foreground transition-colors">
-              Learn the ways you can &nbsp;
+              Learn ways you can &nbsp;
               <Link
                 href="/contact"
                 className="text-primary hover:underline font-medium"
