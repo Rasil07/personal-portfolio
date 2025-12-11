@@ -331,14 +331,14 @@ const Landing = () => {
               .
             </li>
             <li className="hover:text-foreground transition-colors">
-              Learn more about &nbsp;
+              Learn the ways you can &nbsp;
               <Link
-                href="/about"
+                href="/contact"
                 className="text-primary hover:underline font-medium"
               >
-                who I am
+                reach out
               </Link>
-              &nbsp; as a person. .
+              &nbsp; to me.
             </li>
             <li className="hover:text-foreground transition-colors">
               Drop me a line—tell me about the role, the problem you&apos;re
